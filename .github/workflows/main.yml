@@ -8,16 +8,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        uses: ArtemSerebrennkov/buildozer-action@v1
+        # تم تصحيح اسم المستخدم هنا من ArtemSerebrennkov إلى ArtemSerebryakov
+        uses: ArtemSerebryakov/buildozer-action@v1
         with:
           buildozer_version: master
           python_version: 3.11
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        # تم تحديث الإصدار إلى v4 لحل مشكلة التوقف (Deprecation)
+        uses: actions/upload-artifact@v4
         with:
           name: FireSkeleton-APK
           path: bin/*.apk
