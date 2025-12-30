@@ -1,13 +1,21 @@
 [app]
-title = Fire Skeleton
-package.name = fireskeleton
-package.domain = org.myapp
+title = MySkeleton
+package.name = myskeleton
+package.domain = org.test
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py
 version = 0.1
 requirements = python3,kivy
 orientation = portrait
 fullscreen = 1
-android.archs = arm64-v8a, armeabi-v7a
-android.allow_backup = True
+android.archs = arm64-v8a
+android.accept_sdk_license = True
+android.skip_update = False
+android.minapi = 21
+android.sdk = 33
 p4a.branch = master
+
+[buildozer]
+log_level = 2
+warn_on_root = 1
+
