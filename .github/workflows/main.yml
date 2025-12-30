@@ -6,16 +6,26 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04 # تحديد نسخة النظام لضمان التوافق
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        # استخدام الأداة الرسمية والأكثر استقراراً
-        uses: kivy/buildozer-action@master
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          save_build_caches: true
-          push_build_caches: true
+          python_version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libffi-dev python3-dev libssl-dev zlib1g-dev libgdbm-dev libncurses5-dev libreadline-dev libbz2-dev libsqlite3-dev tk-dev libgdbm-compat-dev liblzma-dev libffi-dev uuid-dev tar bzip2 gzip openjdk-17-jdk
+          pip install --upgrade pip
+          pip install buildozer cython kivy
+
+      - name: Build APK with Buildozer
+        run: |
+          yes | buildozer -v android debug
+        continue-on-error: false
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
