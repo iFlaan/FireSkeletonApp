@@ -6,19 +6,18 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 # تحديد نسخة النظام لضمان التوافق
     steps:
       - uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        # تم تصحيح اسم المستخدم هنا من ArtemSerebrennkov إلى ArtemSerebryakov
-        uses: ArtemSerebryakov/buildozer-action@v1
+        # استخدام الأداة الرسمية والأكثر استقراراً
+        uses: kivy/buildozer-action@master
         with:
-          buildozer_version: master
-          python_version: 3.11
+          save_build_caches: true
+          push_build_caches: true
 
       - name: Upload Artifact
-        # تم تحديث الإصدار إلى v4 لحل مشكلة التوقف (Deprecation)
         uses: actions/upload-artifact@v4
         with:
           name: FireSkeleton-APK
